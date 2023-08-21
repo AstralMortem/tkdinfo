@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7v@y_&ooll$j^t1v_e1ysmqgr$70bi(y)apk_mtrg-3h+i%9=x'
+SECRET_KEY = os.get_env("SECRET_KEY", 'sdfsdhs')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
@@ -80,7 +81,7 @@ WSGI_APPLICATION = 'taekwondokb.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Feel free to alter this value to suit your needs.
-        default=os.getenv("DB_PATH"),
+        default=os.getenv("DATABASE_URL"),
         conn_max_age=600
     )
 }
@@ -152,11 +153,11 @@ STORAGES = {
     "default": {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"},
     
     "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        "BACKEND": 'whitenoise.storage.CompressedManifestStaticFilesStorage',
     }
     }
-AWS_S3_ACCESS_KEY_ID = 'x9MV76jL1vazpNOP'
-AWS_S3_SECRET_ACCESS_KEY = 'E0KFzdroeFXu6rXaBgxmX7lFSYbqkVCHOIQ3bliD'
+AWS_S3_ACCESS_KEY_ID = os.getenv("AWS_KEY")
+AWS_S3_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET")
 AWS_STORAGE_BUCKET_NAME = "taekwondokb"
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_ENDPOINT_URL = 'https://s3.tebi.io'
