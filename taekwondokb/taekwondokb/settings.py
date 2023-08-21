@@ -149,13 +149,10 @@ LOGIN_URL = '/accounts/profile'
 LOGOUT_REDIRECT_URL = '/'
 
 
-STORAGES = {
-    "default": {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"},
-    
-    "staticfiles": {
-        "BACKEND": 'whitenoise.storage.CompressedManifestStaticFilesStorage',
-    }
-    }
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 AWS_S3_ACCESS_KEY_ID = os.getenv("AWS_KEY")
 AWS_S3_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET")
 AWS_STORAGE_BUCKET_NAME = "taekwondokb"
