@@ -1,0 +1,13 @@
+
+
+<form hx-post="{{request.path}}" method="post" class="form">
+    {%csrf_token%}
+    <div class="field">
+        <label for="" class="label">{{form.name.label}}</label>
+        <p class="control">
+            {{form.name}}
+        </p>
+    </div>
+    
+    <button type="submit" class="button is-dark">Згенерувати</button>
+</form>

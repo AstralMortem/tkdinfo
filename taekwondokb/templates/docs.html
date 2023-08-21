@@ -1,0 +1,89 @@
+{%extends 'base.html'%}
+
+{%block content%}
+    <div class="container ">
+        <div class="columns is-multiline">
+            <div class="column is-12">
+                <p class="title is-5">Документація для розробників</p>
+            </div>
+            <div class="column is-12">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">
+                            1. Зареєструйтесь в системі
+                        </p>
+                    </header>
+                    <div class="card-content">
+                        <div class="columns is-centered">
+                           
+                            <div class="column is-2">
+                                <a href="{%url 'restapi:register'%}" class="button is-outlined is-dark">Зареєструватися</a>
+                            </div>
+                            <div class="column is-2">
+                                <a href="{%url 'restapi:login'%}" class="button is-dark">Увійти</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-12">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">
+                            2. створіть API Key
+                        </p>
+                    </header>
+                    <div class="card-content">
+                        <p>Дайте назву ключа і система автоматично його згенерує</p>
+                        <p>Ключ має стандарт uuid4, Наприклад: <span class="tag has-text-danger">16fd2706-8baf-433b-82eb-8c7fada847da</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-12">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">
+                            3. Requests
+                        </p>
+                    </header>
+                    <div class="card-content">
+                        <p>Всі запити формуються в такому форматі</p>
+                        <p><span class="tag">https://{{ request.META.HTTP_HOST }}/api/v1/<:token>/<:endpoints></span></p>
+                        <p>Де token - це токен аутентифікації користувача, а endpoint лінк до данних</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-12">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">
+                            3. Endpoints
+                        </p>
+                    </header>
+                    <div class="card-content">
+                        <p class="title is-6"><span class="tag has-text-danger">/encyclopedia/</span> -- Список всіх томів</p>
+                        <p class="title is-6"><span class="tag has-text-danger">/encyclopedia/<:tom>/</span> -- Зміст конкретного Тому.</p>
+                        <p class="subtitle is-6"><span class="tag">:tom</span> - Номер Тому</p>
+                        <p class="title is-6"><span class="tag has-text-danger">/encyclopedia/<:tom>/:page>/</span> -- Сторінка.</p>
+                        <p class="subtitle is-6"><span class="tag">:tom</span> - Номер Тому</p>
+                        <p class="subtitle is-6"><span class="tag">:page</span> - Номер сторінки</p>
+                        <hr>
+                        <p class="title is-6"><span class="tag has-text-danger">/belts/</span> -- Список всіх поясів</p>
+                        <p class="title is-6"><span class="tag has-text-danger">/belts/<:kupslug></span> -- Нормативи на конкретний пояс</p>
+                        <p class="subtitle is-6"><span class="tag">:kupslug</span> - ID поясу</p>
+                        <hr>
+                        <p class="title">Приклад:</p>
+                        <p><span class="tag">https://{{ request.META.HTTP_HOST }}/api/v1/<:token>/belts/9-kup</span> -- Даний запит виведе нормативи на біло-жовтий пояс в форматі JSON</p>
+                        <p>
+                            <span class="tag has-text-danger">
+                                <pre>
+                                {{belt}}
+                                </pre>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </div>
+{%endblock%}

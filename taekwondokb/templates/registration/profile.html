@@ -1,0 +1,48 @@
+{%extends 'base.html'%}
+
+
+{%block content%}
+
+<div class="container">
+    <div class="columns is-multiline">
+        <div class="column">
+            <div class="card">
+                <div class="card-content">
+                    <p class="title">Дані користувача</p>
+                    <p class="subtitle is-6 mt-3">Email <span class="tag has-text-dark">{{request.user.email}}</span></p>
+                    <p class="subtitle is-6">Username <span class="tag has-text-dark">{{request.user.username}}</span></p>
+                    
+                    <div class="is-flex is-flex-direction-row is-justify-content-space-around">
+                        <p><a href="{% url 'restapi:password_reset' %}" class="button is-outlined">Змінити пароль</a></p>
+                    <a href="{%url 'restapi:logout'%}" class="button is-outlined is-dark">Вийти</a>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="card">
+                <div class="card-content" id="token-title">
+                    <p class="title">API Ключ</p>
+                    {%if token%}
+                        <div class="has-text-centered" >
+                            <p class="title is-5">{{token.name}}</p>
+                            <p><span class="tag">{{token.token}}</span></p>
+                        </div>
+                        <button class="button is-danger" hx-delete="{%url 'restapi:token'%}" hx-target="#token-title" hx-swap="innerHTML">
+                            <span class="icon">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                        </button>
+                    {%else%}
+                        <p class="title is-6">У вас немає ключа. Згенеруйте його нижче</p>
+                        <button hx-get="{%url 'restapi:token'%}" hx-swap="outerHTML" target="#token-btn" id="token-btn" class="button is-dark">Створити ключ</button>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

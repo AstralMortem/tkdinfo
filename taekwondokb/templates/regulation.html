@@ -1,0 +1,206 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class=" button is-rounded is-outlined  closebtn mt-2" onclick="closeNav()">&times;</a>
+        <div class="card mx-2">
+            <div class="card-content is-flex is-flex-direction-column is-justify-content-space-around">
+                {%if regulation.tul%}
+                <a class="button is-rounded is-outlined mt-2 is-dark" href="#tul" onclick="closeNav()" >Тулі</a>
+            {%endif%}
+            {%if regulation.kicks%}
+                    <a class="button is-rounded is-outlined mt-2 is-dark" href="#kicks" onclick="closeNav()">Удари</a>
+            {%endif%}
+            {%if regulation.sparings%}
+                    <a class="button is-rounded is-outlined mt-2 is-dark" href="#sparing" onclick="closeNav()">Спаринг</a>
+            {%endif%}
+            {%if regulation.self_defence%}
+                    <a class="button is-rounded is-outlined mt-2 is-dark" href="#self-defence" onclick="closeNav()">Самозахист</a>
+            {%endif%}
+            {%if regulation.spec_tech%}
+                    <a class="button is-rounded is-outlined mt-2 is-dark" href="#spec-tech" onclick="closeNav()">Спец техніка</a>
+            {%endif%}
+            {%if regulation.power_kicks%}
+                    <a class="button is-rounded is-outlined mt-2 is-dark"  href="#power-kick" onclick="closeNav()">Силові розбивання</a>
+            {%endif%}
+            {%if regulation.OFP%}
+                    <a class="button is-rounded is-outlined mt-2 is-dark" href="#ofp" onclick="closeNav()">ЗФП</a>
+            {%endif%}
+            {%if regulation.theory%}
+                    <a class="button is-rounded is-outlined mt-2 is-dark" href="#theory" onclick="closeNav()">Теорія</a>
+            {%endif%}
+            </div>
+        </div>
+            
+</div>
+
+<div class="container" id="main">
+    <a id="button"></a>
+    <a id="button2" onclick="openNav()"></a>
+    <section class="section">
+        <div class="columns is-multiline">
+            <div class="column is-6">
+                <div class="card">
+                    <div class="card-content has-text-centered">
+                        <img src="{{regulation.get_image}}">
+                        <h1 class="title">{{regulation.belt.title}} ({{regulation.belt.kup}})</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        {{regulation.description|safe}}
+                    </div>
+                </div>
+                <div class="has-text-centered mt-5">
+                    <button class="button is-rounded is-dark" onclick="openNav()">Навігатор</button>
+                </div>   
+            </div>
+        </div>
+    </section>
+    <section class="section" id="tul">
+        <div class="columns is-multiline">
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        <h1 class="title">Тулі</h1>
+                        <div class="content">
+                            {{regulation.tul|safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {%if regulation.kicks%}
+    <section class="section" id="kicks">
+        <div class="columns is-multiline">
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        <h1 class="title">Удари</h1>
+                        <div class="content">
+                            {{regulation.kicks|safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endif%}
+    {%if regulation.sparings%}
+    <section class="section" id="sparing">
+        <div class="columns is-multiline">
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        <h1 class="title">Спаринги</h1>
+                        <div class="content">
+                            {{regulation.sparings|safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endif%}
+    {%if regulation.self_defence%}
+    <section class="section" id="self_defence">
+        <div class="columns is-multiline">
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        <h1 class="title">Самоозахист</h1>
+                        <div class="content">
+                            {{regulation.self_defence|safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endif%}
+    {%if regulation.spech_tech%}
+    <section class="section" id="spec_tech">
+        <div class="columns is-multiline">
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        <h1 class="title">Спец техніка</h1>
+                        <div class="content">
+                            {{regulation.spech_tech|safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endif%}
+    {%if regulation.power_kicks%}
+    <section class="section" id="power_kick">
+        <div class="columns is-multiline">
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        <h1 class="title">Силові розбивання</h1>
+                        <div class="content">
+                            {{regulation.power_kicks|safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endif%}
+    {%if regulation.OFP%}
+    <section class="section" id="ofp">
+        <div class="columns is-multiline">
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        <h1 class="title">Загальна фізична підготовка(ЗФП)</h1>
+                        <div class="content">
+                            {{regulation.OFP|safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endif%}
+    {%if regulation.theory%}
+    <section class="section" id="theory">
+        <div class="columns is-multiline">
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        <h1 class="title">Теорія</h1>
+                        <div class="content">
+                            {{regulation.theory|safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endif%}
+</div>
+
+
+<script>
+
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+
+{%endblock%}
+

@@ -1,0 +1,59 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+
+<div class="container">
+    <div class="card has-text-centered">
+        <div class="card-content">
+            <div class="columns is-multiline is-centered">
+                <form class="form" action="{{request.path}}" method="post">
+                    {%csrf_token%}
+                    {% if form.errors %}
+                    <div class="column is-12">
+                        <p class="title has-text-danger">{{form.errors}}</p>
+                    </div>
+                    {% endif %}
+                    <div class="column is-12">
+                        <div class="field">
+                            <label for="">Псевдонім</label>
+                            <p class="control">
+                                {{form.username}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column is-12">
+                        <div class="field">
+                            <label for="">Email</label>
+                            <p class="control">
+                                {{form.email}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column is-12">
+                        <div class="field">
+                            <label for="">Пароль</label>
+                            <p class="control">
+                                {{form.password1}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column is-12">
+                        <div class="field">
+                            <label for="">Повторіть пароль</label>
+                            <p class="control">
+                                {{form.password2}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <button type="submit" class="button is-rounded is-dark">Створити</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{%endblock%}

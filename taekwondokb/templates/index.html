@@ -1,0 +1,43 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<div class="container">
+<div class="columns is-centered is-multiline ">
+    <div class="column is-4-desktop is-6-tablet is-10-mobile  is-offset-1-mobile">
+        <a href="{%url 'encyclopedia:volumes-list'%}">
+        <div class="card">
+            <div class="card-content has-text-centered">
+                <span class="icon is-large">
+                    <i class="fa-solid fa-book fa-2xl"></i>
+                </span>
+                <p class="title is-5">Енциклопедія</p>
+            </div>
+        </div>
+    </a>
+    </div>
+    <div class="column is-4-desktop is-6-tablet is-10-mobile  is-offset-1-mobile">
+        <a href="{%url 'regulations:belts-list'%}">
+        <div class="card">
+            <div class="card-content has-text-centered">
+                <span class="icon is-large">
+                    <i class="fa-solid fa-hand-fist fa-2xl"></i>
+                </span>
+                <p class="title is-5">Атестації</p>
+            </div>
+        </div>
+    </a>
+    </div>
+    <div class="column is-4-desktop is-6-tablet is-10-mobile  is-offset-1-mobile">
+        <a href="{%url 'restapi:docs'%}">
+        <div class="card">
+            <div class="card-content has-text-centered">
+                <span class="icon is-large">
+                    <i class="fa-solid fa-globe fa-2xl"></i>
+                </span>
+                <p class="title is-5">API</p>
+            </div>
+        </div></a>
+    </div>
+</div>
+</div>
+{%endblock%}

@@ -1,0 +1,7 @@
+<div class="card-content" id="new-volume-content">
+    <div class="content is-flex is-flex-direction-column">
+        {%for page in pages %}
+            {%if page.title%}<a href="{{page.get_absolute_url}}">Стр.{{page.page}} - {{page.title}}</a>{%endif%}
+        {%endfor%}
+    </div>
+</div>

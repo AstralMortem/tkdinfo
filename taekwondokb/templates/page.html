@@ -1,0 +1,89 @@
+{%extends 'base.html'%}
+
+{%block content%}
+{% load mathfilters %}
+
+<div id="mySidenav" class="sidenav ">
+    <a href="javascript:void(0)" class=" button is-rounded is-outlined closebtn mt-2" onclick="closeNav()">&times;</a>
+
+    <p class="title is-5 has-text-white mx-4 my-2">Зміст</p>
+    <div class="card mx-2">
+        <div class="card-content" id="volume-content">
+        </div>
+    </div>
+</div>
+
+<div class="container" id="main">
+    <a id="button"></a>
+    <a id="button2" onclick="openNav()"></a>
+    <div class="columns is-multiline">
+        <div class="column is-12">
+            <div class="card has-background-light ">
+                {%if page.title%}
+                <header class="card-header has-text-centered">
+                    <p class="card-header-title">
+                        {{page.title}}
+                    </p>
+                    <div class="card-header-icon">
+                        
+                        {%if page.page|sub:1 != 0%}
+                        <a class="button is-rounded is-outlined is-dark mx-2" href="{%url 'encyclopedia:page' volume=page.tom.slug page=page.page|sub:1%}">
+                            <span class="icon-text">
+                                <span class="icon">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span>{{page.page|sub:1}}</span>
+                            </span></a>
+                        {%endif%}
+                        {%if not page.is_last%}
+                        <a class="button is-rounded is-outlined is-dark mx-2" href="{%url 'encyclopedia:page' volume=page.tom.slug page=page.page|add:1%}">
+                            <span class="icon-text">
+                                <span >{{page.page|add:1}}</span>
+                                <span class="icon">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </span></a>    
+                        </a>
+                        {%endif%}
+
+                        
+                        <button class="button is-rounded is-outlined is-dark" onclick="openNav()">Зміст</button>
+                    </div>
+                </header>
+                {%endif%}
+                <div class="card-content ">
+                    <div class="content ">
+                        {{page.text|safe}}
+                    </div>
+                </div>
+                <footer class="card-footer ">
+                    <p class="card-footer-item subtitle is-6">
+                        Стр. {{page.page}}
+                    </p>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "400px";
+      if(!$(".card-content").is("#new-volume-content")){
+        htmx.ajax("GET","{%url 'encyclopedia:volume' volume=page.tom.slug%}", {target:"#volume-content", swap:"outerHTML"})
+      }
+      
+      
+      
+    }
+    
+    /* Set the width of the side navigation to 0 */
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+
+
+{%endblock%}
+

@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="container">
+    <div class="card">
+        <div class="card-content has-text-centered">
+            <div class="columns is-centered is-multiline">
+                <form action="{{request.path}}" method="post" class="form">
+                    {%csrf_token%}
+                    {% if form.errors %}
+                    <div class="column is-12">
+                        <p class="title has-text-danger">{{form.errors}}</p>
+                    </div>
+                    {% endif %}
+                    <div class="column is-12">
+                        <div class="field">
+                            <div class="label">{{form.username.label}}</div>
+                            <p class="control">
+                                {{form.username}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column is-12">
+                        <div class="field">
+                            <div class="label">{{form.password.label}}</div>
+                            <p class="control">
+                                {{form.password}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column is-12">
+                        <button type="submit" class="button is-dark ">Увійти</button>
+                    </div>
+                    <div class="column is-12">
+                        <p><a href="{% url 'restapi:password_reset' %}">Lost password?</a></p>
+                    </div>
+                    <input type="hidden" name="next" value="{{ next }}">
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{%endblock%}

@@ -1,0 +1,58 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+
+<div class="container">
+    
+    <div class="columns is-multiline">
+        {%for vol in volume%}
+            <div class="column is-3">
+                
+                <div class="card">
+                    <a href="{%url 'encyclopedia:page' volume=vol.slug page=1%}">
+
+                    <div class="card-content">
+                        <h1 class="title is-3">Том № {{vol.tom}}</h1>
+                        <p class="subtitle is-5">{{vol.title}}</p>
+                        
+                            <a href="{{vol.original_file.url}}" download class="button is-rounded is-dark mt-2">
+                                <span class="icon">
+                                    <i class="fa-solid fa-download"></i>
+                                </span>
+                            </a>
+                        
+                        
+                    </div>
+                </a>
+                    <hr class="my-0">
+                    <a hx-get="{%url 'encyclopedia:volume' volume=vol.slug%}" hx-swap="outerHTML" hx-target="#volume-content-{{vol.slug}}"  >
+                    <header class="card-header card-header-menu">
+                        <p class="card-header-title card-title">
+                          Зміст
+                        </p>
+                        <button class="card-header-icon" aria-label="more options" >
+                          <span class="icon">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                    </header></a>
+                    <div id="volume-content-{{vol.slug}}">
+                    </div>
+                </div>
+            </div>
+            
+        {%endfor%}
+    </div>
+</div>
+
+
+
+{%endblock%}
+
+<script>
+    var el = $('.card-header');
+    el.click(function(el){
+        alert("dfsf");
+    })
+</script>
