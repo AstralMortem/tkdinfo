@@ -1,7 +1,7 @@
 from .base import * 
 import dj_database_url
 
-DEBUG = False
+DEBUG = True
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
