@@ -19,11 +19,13 @@
     <div class="columns is-multiline">
         <div class="column is-12">
             <div class="card has-background-light ">
-                {%if page.title%}
+               
                 <header class="card-header has-text-centered">
+                     {%if page.title%}
                     <p class="card-header-title">
                         {{page.title}}
                     </p>
+                     {%endif%}
                     <div class="card-header-icon">
                         
                         {%if page.page|sub:1 != 0%}
@@ -50,7 +52,7 @@
                         <button class="button is-rounded is-outlined is-dark" onclick="openNav()">Зміст</button>
                     </div>
                 </header>
-                {%endif%}
+               
                 <div class="card-content ">
                     <div class="content ">
                         {{page.text|safe}}
