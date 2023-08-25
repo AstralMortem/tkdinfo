@@ -1,13 +1,22 @@
 import os
 from pathlib import Path
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
-ALLOWED_HOSTS = []
 
 
 SECRET_KEY = os.getenv("SECRET_KEY", 'sdfsdhs')
+
+DEBUG = False
+
+ALLOWED_HOSTS = []
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
 
 
 # Application definition
@@ -59,6 +68,15 @@ TEMPLATES = [
     },
 ]
 
+
+DATABASES = {
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default=os.getenv("DATABASE_URL"),
+        conn_max_age=600
+    ),
+}
+
 WSGI_APPLICATION = 'taekwondokb.wsgi.application'
 
 
@@ -94,6 +112,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -110,6 +132,15 @@ LOGIN_REDIRECT_URL = '/accounts/profile'
 LOGIN_URL = '/accounts/profile'
 LOGOUT_REDIRECT_URL = '/'
 
+
+
+
+
+AWS_S3_ACCESS_KEY_ID = os.getenv("AWS_KEY")
+AWS_S3_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET")
+AWS_STORAGE_BUCKET_NAME = "taekwondokb"
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_ENDPOINT_URL = 'https://s3.tebi.io'
 
 
 CORS_ALLOW_ALL_ORIGINS = True
